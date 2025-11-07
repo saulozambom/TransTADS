@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TransTADS - Rastreamento de Pacotes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+      color: #111;
+    }
+
+    header {
+      background: linear-gradient(to right, green 33%, white 33%, white 66%, red 66%);
+      text-align: center;
+      padding: 40px 10px 10px;
+      border-radius: 0 0 15px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      font-weight: bold;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 1em;
+      color: #b00;
+    }
+
+    nav {
+      background-color: #111;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      gap: 40px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ff3b3b;
+    }
+
+    section {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 700px;
+      margin: 30px auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #111;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .servico-item {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .servico-item span {
+      margin-left: 8px;
+    }
+
+    .rastreamento {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 12px;
+    }
+
+    button {
+      background-color: #e60b0b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #c00000;
+    }
+
+    .resultado {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    footer {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      border-radius: 15px 15px 0 0;
+      font-size: 0.9em;
+      margin-top: 50px;
+    }
+
+    form label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .sucesso {
+      color: green;
+      font-weight: bold;
+    }
+
+    .erro {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TransTADS</h1>
+    <p>Conectando destinos com eficiência e segurança</p>
+  </header>
+
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#rastreamento">Rastreamento</a>
+    <a href="#cadastro">Cadastrar Usuário</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <section id="sobre">
+    <h2>Sobre Nós</h2>
+    <p>A TransTADS é uma empresa <strong>especializada</strong> em transporte e logística moderna. Nossa missão é <strong>garantir</strong> que cada pacote chegue ao seu destino com segurança e agilidade.</p>
+  </section>
+
+  <section id="servicos">
+    <h2>Serviços</h2>
+    <div class="servico-item">🚚 <span>Transporte Nacional e Internacional</span></div>
+    <div class="servico-item">📦 <span>Rastreamento em tempo real</span></div>
+    <div class="servico-item">🏢 <span>Soluções personalizadas para empresas</span></div>
+  </section>
+
+  <section id="rastreamento">
+    <h2>Rastreamento de Pacotes</h2>
+    <p>Digite o código de rastreamento abaixo:</p>
+    <div class="rastreamento">
+      <input type="text" id="codigo" placeholder="Ex: BR123456789">
+      <button onclick="rastrear()">Rastrear</button>
+    </div>
+    <div class="resultado" id="resultado"></div>
+  </section>
+
+  <section id="cadastro">
+    <h2>Cadastrar Usuário</h2>
+    <form id="formCadastro" onsubmit="return cadastrarUsuario(event)">
+      <label for="nome">Nome Completo:</label>
+      <input type="text" id="nome" required>
+
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" required>
+
+      <label for="rua">Rua:</label>
+      <input type="text" id="rua" required>
+
+      <label for="bairro">Bairro:</label>
+      <input type="text" id="bairro" required>
+
+      <label for="cidade">Cidade:</label>
+      <input type="text" id="cidade" required>
+
+      <label for="estado">Estado:</label>
+      <input type="text" id="estado" placeholder="Ex: ES" required>
+
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" placeholder="Ex: 29000-000" required>
+
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" required>
+
+      <label for="confirmarSenha">Confirmar Senha:</label>
+      <input type="password" id="confirmarSenha" required>
+
+      <button type="submit">Cadastrar</button>
+      <div id="mensagemCadastro"></div>
+    </form>
+  </section>
+
+  <section id="contato">
+    <h2>Contato</h2>
+    <p>📞 (27) 3333-4444</p>
+    <p>✉ contato@transtads.com.br</p>
+    <p>📍 Av. Brasil, 123 – Vitória/ES</p>
+  </section>
+
+  <footer>
+    © 2025 TransTADS – Todos os direitos reservados
+  </footer>
+
+  <script>
+    function rastrear() {
+      const codigo = document.getElementById('codigo').value.trim();
+      const resultado = document.getElementById('resultado');
+
+      if (!codigo) {
+        resultado.style.color = "red";
+        resultado.textContent = "Por favor, insira um código de rastreamento.";
+        return;
+      }
+
+      resultado.style.color = "green";
+      resultado.textContent = O pacote ${codigo} está em trânsito. Última atualização: Centro de Distribuição de Vitória/ES.;
+    }
+
+    function cadastrarUsuario(event) {
+      event.preventDefault();
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const rua = document.getElementById("rua").value.trim();
+      const bairro = document.getElementById("bairro").value.trim();
+      const cidade = document.getElementById("cidade").value.trim();
+      const estado = document.getElementById("estado").value.trim();
+      const cep = document.getElementById("cep").value.trim();
+      const senha = document.getElementById("senha").value;
+      const confirmarSenha = document.getElementById("confirmarSenha").value;
+      const mensagem = document.getElementById("mensagemCadastro");
+
+      if (senha !== confirmarSenha) {
+        mensagem.textContent = "As senhas não coincidem. Tente novamente.";
+        mensagem.className = "erro";
+        return false;
+      }
+
+      mensagem.textContent = Usuário ${nome} cadastrado com sucesso!;
+      mensagem.className = "sucesso";
+      document.getElementById("formCadastro").reset();
+      return true;
+    }
+  </script>
+</body>
+</html>
